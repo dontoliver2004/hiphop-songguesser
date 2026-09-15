@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0B0C18">
-<title>金曲猜歌王 · NTUPM 18th</title>
+<title>誰是嘻哈囝 · NTUPM 18th</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700;900&display=swap">
@@ -529,8 +529,8 @@ input[type=text]:focus{outline:0;border-bottom-color:var(--foam)}
 <!-- ═══════════ START ═══════════ -->
 <div class="screen" id="screen-start">
   <div class="brand">
-    <div class="eyebrow">台大流唱社</div>
-    <h1>金曲猜歌王</h1>
+    <div class="eyebrow">饒舌愛好者</div>
+    <h1>誰是嘻哈囝</h1>
     <div class="slogan">我們不一定最會唱歌<br>但我們一定最會猜歌</div>
   </div>
 
@@ -637,7 +637,7 @@ input[type=text]:focus{outline:0;border-bottom-color:var(--foam)}
 <!-- ═══════════ RESULT ═══════════ -->
 <div class="screen" id="screen-result" hidden>
   <div class="scorecard">
-    <div class="title" id="res-title">金曲猜歌王</div>
+    <div class="title" id="res-title">誰是嘻哈囝</div>
     <div class="line" id="res-line"></div>
     <div class="big" id="res-score">0</div>
     <div class="meta" id="res-meta">答對 0 題,共 10 題</div>
@@ -1470,7 +1470,7 @@ function finish(){
        crew beaten    — named opponents read better than an abstract rank
        percent beaten — everyone gets a number, so nobody sees a bare zero */
   const beaten = crewBeaten(G.total);
-  G.shareText = `我在台大流唱社的金曲猜歌王挑戰中獲得了 ${G.total.toLocaleString()} 分，得到「${rank.title}」的稱號。
+  G.shareText = `我在饒舌愛好者的誰是嘻哈囝挑戰中獲得了 ${G.total.toLocaleString()} 分，得到「${rank.title}」的稱號。
 ` +
     `我擊敗了 ${beaten}/${CREW.length} 位流唱社幹部，贏過了 ${beatPercent(G.total)}% 的玩家。你也來挑戰看看吧！`;
   $('res-meta').textContent =
@@ -1544,7 +1544,7 @@ function finishStage(){
   $('st-facts').innerHTML  = stageFacts(st, true);
   // clearing all six is the moment worth sharing, so that slot becomes share
   G.shareText = last
-    ? `我在台大流唱社的金曲猜歌王挑戰中六關全破囉。你也來試試看吧！`
+    ? `我在饒舌愛好者的誰是嘻哈囝挑戰中六關全破囉。你也來試試看吧！`
     : G.shareText;
   $('btn-stage-go').hidden = false;
   $('btn-stage-go').textContent = last ? '分享這個成績' : `進入第 ${G.stage + 1} 關`;
@@ -1586,10 +1586,10 @@ function failStage(st){
     ` · 最佳紀錄 第 ${Store.bestStage()} 關`;
 
   G.shareText = cleared > 0
-    ? `我在台大流唱社的金曲猜歌王挑戰中闖到第 ${cleared} 關(共 ${STAGES.length} 關)
+    ? `我在饒舌愛好者的誰是嘻哈囝挑戰中闖到第 ${cleared} 關(共 ${STAGES.length} 關)
 ` +
       `倒在第 ${G.stage} 關的 ${st.need.toLocaleString()} 分門檻前。你也來挑戰看看吧！`
-    : `我在台大流唱社的金曲猜歌王挑戰中連第 1 關都沒過，不然你來玩玩看吧！`;
+    : `我在饒舌愛好者的誰是嘻哈囝挑戰中連第 1 關都沒過，不然你來玩玩看吧！`;
 
   const nextEl = $('res-next');
   nextEl.innerHTML = `再玩一次會<b>從第 1 關重新開始</b>`;
@@ -1622,7 +1622,7 @@ $('btn-stage-quit').addEventListener('click', () => { closePop(); show('screen-s
 function shareLine(){
   // drop a trailing index.html so the shared link is the clean one
   const url = (location.origin + location.pathname).replace(/index\.html$/, '');
-  return { text: G.shareText || '金曲猜歌王', url };
+  return { text: G.shareText || '誰是嘻哈囝', url };
 }
 
 function toast(msg, kind){
@@ -1637,7 +1637,7 @@ async function doShare(){
   const { text, url } = shareLine();
   if(navigator.share){
     try{
-      await navigator.share({ title: '金曲猜歌王', text, url });
+      await navigator.share({ title: '誰是嘻哈囝', text, url });
       return;                                   // the sheet opened; do not also copy
     }catch(e){
       if(e && e.name === 'AbortError') return;  // the user dismissed the sheet; not a failure
