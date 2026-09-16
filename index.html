@@ -586,7 +586,7 @@ input[type=text]:focus{outline:0;border-bottom-color:var(--foam)}
       </svg>
       <span class="handle">ntupm__18th</span>
     </a>
-    <button type="button" id="btn-board-1">幹部榜</button>
+    <button type="button" id="btn-board-1">懂聽榜</button>
   </div>
   <div class="credit">音源:Apple Music 官方試聽</div>
 </div>
@@ -645,7 +645,7 @@ input[type=text]:focus{outline:0;border-bottom-color:var(--foam)}
   </div>
   <div class="misses" id="res-misses"></div>
   <div class="row">
-    <button class="btn ghost" id="btn-board-2">幹部榜</button>
+    <button class="btn ghost" id="btn-board-2">懂聽榜</button>
     <button class="btn" id="btn-again">再玩一次</button>
   </div>
   <button class="btn ghost share" id="btn-share">
@@ -695,7 +695,7 @@ input[type=text]:focus{outline:0;border-bottom-color:var(--foam)}
 <!-- ═══════════ CREW BOARD ═══════════ -->
 <div class="screen" id="screen-board" hidden>
   <div class="board-head">
-    <h2>流唱社幹部榜</h2>
+    <h2>流唱社懂聽榜</h2>
     <div class="board-note" id="board-note"></div>
   </div>
   <div class="board-list" id="board-list"></div>
@@ -1458,7 +1458,7 @@ function finish(){
   };
   const prevBest = Store.best();
   Store.save(entry);
-  $('btn-board-2').textContent = '幹部榜';
+  $('btn-board-2').textContent = '懂聽榜';
   $('btn-again').textContent   = '再玩一次';
 
   const rank = titleFor(G.total);
