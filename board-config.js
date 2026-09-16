@@ -17,6 +17,5 @@
  * update or delete, so a leaked key cannot alter or remove existing scores.
  */
 window.BOARD_CONFIG = {
-  url:     'https://onixomvicywcbrqpdvgv.supabase.co',   // 例:https://abcdefghijk.supabase.co
-  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9uaXhvbXZpY3l3Y2JycXBkdmd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NjQ0MjksImV4cCI6MjEwNDU0MDQyOX0.dc8HfbYhu3oaAskFQQO9gdti-r8fNHWwTRtcg_8xCjA'    // 例:eyJhbGciOi...(很長的一串)
-};
+  url:     'https://snbdhkzznjzmbymitxos.supabase.co',   // 例:https://abcdefghijk.supabase.co
+  anonKey: 'sb_publishable_gD4hD8XMdWQapmNEyPtZuw_UPEA9C3r};
