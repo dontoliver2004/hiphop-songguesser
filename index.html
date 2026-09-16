@@ -1703,7 +1703,7 @@ function renderBoard(){
   note.innerHTML = best > 0
     ? `你的最佳 <b>${best.toLocaleString()}</b> 分 —— 擊敗 <b>${beaten}</b> / ${CREW.length} 位幹部;` +
       `在所有玩家裡,你贏過了 <b>${beatPercent(best)}%</b> 的玩家。`
-    : `社團的 ${CREW.length} 個幹部自己先玩了一輪。來挑戰流唱社看你能擊敗幾個人吧！`;
+    : `看看誰才是最純正的嘻哈囝!`;
 
   // scroll the list itself; scrollIntoView would scroll the page and push the heading off
   const meRow = list.querySelector('.rowitem.me');
