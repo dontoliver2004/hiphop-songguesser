@@ -997,6 +997,9 @@ function playClip(q){
       console.error(e);
     }
   }
+   document.getElementById('btn-board-1').addEventListener('click', async () => {
+  await loadLiveLeaderboard();
+});
    function getScore(score, d) {
       if (!d || d.length === 0) return 0;
       if (score <= d[0][0]) return d[0][1];
