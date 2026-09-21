@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700;900&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="board-config.js"></script>
 <style>
 /* ═══════════════════════════════════════════════════════════
    Visual system
@@ -984,7 +986,7 @@ function playClip(q){
 
     // 非同步從 Supabase 抓取即時排行榜
     async function loadLiveLeaderboard() {
-      if (window.BOARD_CONFIG || !window.BOARD_CONFIG.url) {
+      if (window.BOARD_CONFIG || window.BOARD_CONFIG.url) {
         console.warn('尚未設定 Supabase 網址');
         return;
       }
