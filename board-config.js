@@ -18,4 +18,4 @@
  */
 window.BOARD_CONFIG = {
   url:     'https://snbdhkzznjzmbymitxos.supabase.co',   // 例:https://abcdefghijk.supabase.co
-  anonKey: 'sb_publishable_gD4hD8XMdWQapmNEyPtZuw_UPEA9C3r};
+  anonKey: 'sb_publishable_gD4hD8XMdWQapmNEyPtZuw_UPEA9C3r'
