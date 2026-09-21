@@ -976,7 +976,13 @@ function playClip(q){
   return synthClip(q.song, CONFIG.clipSeconds);
 }
 
-// 動態讀取 Supabase 即時排行榜
+// 確保遊戲介面所需的預設變數存在，避免點擊時報錯崩潰
+    window.CREW_TOTAL = window.CREW_TOTAL || 13191;
+    window.CREW = [];
+    window.SCORE_DIST = window.SCORE_DIST || {};
+    window.beatCount = window.beatCount || function(score) { return 0; };
+
+    // 非同步從 Supabase 抓取即時排行榜
     async function loadLiveLeaderboard() {
       if (!window.BOARD_CONFIG || !window.BOARD_CONFIG.url) {
         console.warn('尚未設定 Supabase 網址');
@@ -996,11 +1002,14 @@ function playClip(q){
         return;
       }
 
-      // 將資料轉換給排行榜介面渲染
-      window.CREW = data || [];
-      // 這裡可以呼叫遊戲原本渲染排行榜的函數（取決於你專案裡的命名，通常可以直接套用）
+      // 將抓到的資料更新進去
+      if (data && data.length > 0) {
+        window.CREW = data;
+      }
     }
 
+    // 啟動時載入即時排行榜
+    loadLiveLeaderboard();
     // 啟動時載入即時排行榜
     loadLiveLeaderboard();
   if(!d.length) return 0;
