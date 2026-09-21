@@ -1037,6 +1037,27 @@ const Store = {
   save(entry){
     const list = this.all();
     list.push(entry);
+     save(entry){
+      const list = this.all();
+      list.push(entry);
+      
+      // ===== 新增：同步上傳至 Supabase 雲端 =====
+      try {
+        if (window.mySupabaseClient) {
+          window.mySupabaseClient.from('scores').insert([
+            { name: entry.name || '匿名玩家', score: entry.score }
+          ]).then(({ error }) => {
+            if (error) console.error('Supabase 寫入失敗:', error);
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+      // ===========================================
+
+      // keep the last 50; nobody reads further back and localStorage has a cap
+      try{ localStorage.setItem(this.KEY, JSON.stringify(list.slice(-50))); }catch(e){}
+    },
     // keep the last 50; nobody reads further back and localStorage has a cap
     try{ localStorage.setItem(this.KEY, JSON.stringify(list.slice(-50))); }catch(e){}
   },
