@@ -1037,14 +1037,6 @@ const Store = {
  save(entry){
       const list = this.all();
       list.push(entry);
-      
-      // Supabase 上傳
-      try {
-        if (window.mySupabaseClient) {
-          window.mySupabaseClient.from('scores').insert({ name: entry.name || '玩家', score: entry.score }).then();
-        }
-      } catch (e) {}
-
       try{ localStorage.setItem(this.KEY, JSON.stringify(list.slice(-50))); }catch(e){}
     },
       // ===========================================
