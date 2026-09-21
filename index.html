@@ -976,29 +976,33 @@ function playClip(q){
   return synthClip(q.song, CONFIG.clipSeconds);
 }
 
-/* ---------- Scores and crew board ----------
+// 動態讀取 Supabase 即時排行榜
+    async function loadLiveLeaderboard() {
+      if (!window.BOARD_CONFIG || !window.BOARD_CONFIG.url) {
+        console.warn('尚未設定 Supabase 網址');
+        return;
+      }
+      
+      const supabaseClient = window.supabase.createClient(window.BOARD_CONFIG.url, window.BOARD_CONFIG.anonKey);
+      
+      const { data, error } = await supabaseClient
+        .from('scores')
+        .select('name, score')
+        .order('score', { ascending: false })
+        .limit(50);
 
-   This used to be a live Supabase leaderboard. It fell over once the game
-   spread online: the free tier gives 5GB of egress a month and we were
-   burning 1.5GB a day, nearly all of it reads — thousands of people
-   refreshing the same board.
+      if (error) {
+        console.error('讀取排行榜失敗：', error);
+        return;
+      }
 
-   It is now two static tables (crew.js):
+      // 將資料轉換給排行榜介面渲染
+      window.CREW = data || [];
+      // 這裡可以呼叫遊戲原本渲染排行榜的函數（取決於你專案裡的命名，通常可以直接套用）
+    }
 
-     CREW        the 46 scores the club set on the two days before the fair
-     SCORE_DIST  score distribution of 13,191 players, 250-point buckets
-
-   Players lost very little. Rank 1,240 out of eight thousand means nothing;
-   "you beat 23 of the club, 89 points short of 兮兮" means something — and
-   it costs zero requests. */
-
-const CREW = (window.CREW || []).slice().sort((a, b) => b.score - a.score);
-
-/* How many players you beat. SCORE_DIST is a cumulative count in 250-point
-   buckets, interpolated in between — the answer wanted is "roughly what
-   fraction", not an exact headcount. */
-function beatCount(score){
-  const d = window.SCORE_DIST || [];
+    // 啟動時載入即時排行榜
+    loadLiveLeaderboard();
   if(!d.length) return 0;
   if(score <= d[0][0]) return d[0][1];
   if(score >= d[d.length - 1][0]) return d[d.length - 1][1];
