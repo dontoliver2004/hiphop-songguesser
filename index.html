@@ -997,12 +997,16 @@ function playClip(q){
       console.error(e);
     }
   }
-   
-    const [s0, n0] = d[i], [s1, n1] = d[i + 1];
-    if(score >= s0 && score <= s1) return n0 + (n1 - n0) * (score - s0) / (s1 - s0);
-  }
-  return d[d.length - 1][1];
-}
+   function getScore(score, d) {
+      if (!d || d.length === 0) return 0;
+      if (score <= d[0][0]) return d[0][1];
+      if (score >= d[d.length - 1][0]) return d[d.length - 1][1];
+      for (let i = 0; i < d.length - 1; i++) {
+        const [s0, n0] = d[i], [s1, n1] = d[i + 1];
+        if (score >= s0 && score <= s1) return n0 + (n1 - n0) * (score - s0) / (s1 - s0);
+      }
+      return d[d.length - 1][1];
+    }
 
 function beatPercent(score){
   return window.CREW_TOTAL ? Math.round(beatCount(score) / window.CREW_TOTAL * 100) : 0;
