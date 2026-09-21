@@ -1000,6 +1000,20 @@ function playClip(q){
    document.getElementById('btn-board-1').addEventListener('click', async () => {
   await loadLiveLeaderboard();
 });
+   async function uploadScoreToSupabase(entry) {
+  try {
+    if (!window.mySupabaseClient && window.BOARD_CONFIG && window.BOARD_CONFIG.url) {
+      window.mySupabaseClient = window.supabase.createClient(window.BOARD_CONFIG.url, window.BOARD_CONFIG.anonKey);
+    }
+    if (window.mySupabaseClient && entry && entry.score) {
+      await window.mySupabaseClient.from('scores').insert([
+        { name: entry.name || '匿名玩家', score: entry.score }
+      ]);
+    }
+  } catch (e) {
+    console.error('上傳成績失敗:', e);
+  }
+}
    function getScore(score, d) {
       if (!d || d.length === 0) return 0;
       if (score <= d[0][0]) return d[0][1];
@@ -1038,6 +1052,7 @@ const Store = {
       const list = this.all();
       list.push(entry);
       try{ localStorage.setItem(this.KEY, JSON.stringify(list.slice(-50))); }catch(e){}
+      uploadScoreToSupabase(entry);
     },
       // ===========================================
 
