@@ -1056,13 +1056,6 @@ const Store = {
     },
       // ===========================================
 
-      // keep the last 50; nobody reads further back and localStorage has a cap
-      try{ localStorage.setItem(this.KEY, JSON.stringify(list.slice(-50))); }catch(e){}
-    },
-    // keep the last 50; nobody reads further back and localStorage has a cap
-    try{ localStorage.setItem(this.KEY, JSON.stringify(list.slice(-50))); }catch(e){}
-  },
-
   /* "Your best" and your row on the crew board only count speed mode. A stage
      score is not comparable — stage 1 draws from 260 Mandarin songs, far
      easier than the full bank, so putting it on the crew board would be
@@ -1750,7 +1743,19 @@ document.addEventListener('keydown', e => {
     if(el) el.click();
   }
 });
-
+// 全域獨立上傳函式
+async function uploadScoreToSupabase(entry) {
+  try {
+    if (!window.mySupabaseClient && window.BOARD_CONFIG && window.BOARD_CONFIG.url) {
+      window.mySupabaseClient = window.supabase.createClient(window.BOARD_CONFIG.url, window.BOARD_CONFIG.anonKey);
+    }
+    if (window.mySupabaseClient && entry) {
+      await window.mySupabaseClient.from('scores').insert([
+        { name: entry.name || '玩家', score: entry.score }
+      ]);
+    }
+  } catch (e) {}
+}
 /* ---------- boot ---------- */
 setVolume(volume);   // apply the remembered volume to the slider and icon
 refreshStartBtn();
