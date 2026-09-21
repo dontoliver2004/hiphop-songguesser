@@ -984,7 +984,7 @@ function playClip(q){
 
     // 非同步從 Supabase 抓取即時排行榜
     async function loadLiveLeaderboard() {
-      if (!window.BOARD_CONFIG || !window.BOARD_CONFIG.url) {
+      if (window.BOARD_CONFIG || !window.BOARD_CONFIG.url) {
         console.warn('尚未設定 Supabase 網址');
         return;
       }
